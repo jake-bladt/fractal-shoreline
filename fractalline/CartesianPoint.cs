@@ -11,9 +11,18 @@ namespace fractalline
         public double X { get; set; }
         public double Y { get; set;}
 
+        public CartesianPoint(double x, double y) { X = x; Y = y; }
+
         public double distanceFrom(CartesianPoint that)
         {
             return Math.Sqrt(squareDifference(this.X, that.X) + squareDifference(this.Y, that.Y));
+        }
+
+        public CartesianPoint pointAt(double directionRads, double distance)
+        {
+            // reduce direction
+            directionRads = directionRads % (2.0 * Math.PI);
+            return new CartesianPoint(this.X + Math.Cos(directionRads), this.Y + Math.Sin(directionRads));
         }
 
         protected double squareDifference(double s1, double s2)
