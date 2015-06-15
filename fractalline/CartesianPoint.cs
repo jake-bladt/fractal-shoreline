@@ -20,5 +20,11 @@ namespace fractalline
         {
             return Math.Pow(s1 - s2, 2.0);
         }
+
+        public bool IsEquivilentTo(CartesianPoint that, double epsilon = Double.Epsilon)
+        {
+            return (Math.Abs(this.X - that.X) <= epsilon) && 
+                   (Math.Abs(this.Y - that.Y) <= epsilon);            
+        }
     }
 }
