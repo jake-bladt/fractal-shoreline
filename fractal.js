@@ -3,11 +3,21 @@ var fractal = (function($) {
   var _cc = undefined;
 
   var getSlope = function(fromPoint, toPoint) {
+    if(fromPoint.x === toPoint.x) return NaN;
     return(fromPoint.y - toPoint.y) / (fromPoint.x - toPoint.x);
   };
 
   var getSlopeRange = function(fromPoint, toPoint, rangeOfMotion) {
     var slope = getSlope(fromPoint, toPoint);
+    if(isNaN(slope)) {
+      // TODO - Apply range of motion.
+      return {
+        min: Math.PI / 2.0,
+        max: 3.0 + Math.PI / 2.0
+      }
+    } else {
+
+    }
   }
 
   var getNextHop = function(start, end, current, hopsCount, rangeOfMotion, aggression) {
