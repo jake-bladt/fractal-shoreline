@@ -1,6 +1,26 @@
 var fractal = (function($) {
 
-  var _cc;
+  var _cc = undefined;
+
+  var getNextHop = function(start, end, current, hopsCount, agression) {
+
+  }
+
+  var getNextPoint = function(start, end, current, args) {
+    var hopsTaken = args.hopsTaken || 0;
+    var maxHops = args.maxHops || 10;
+    var minHops = args.minHops || 5;
+    var aggression = args.aggression || 1.0;
+    var currentPoint = current || start;
+    var remainingHops = maxHops - hopsTaken;
+
+    if(remainingHops === 1) {
+      return end;
+    } else {
+      return getNextPoint(start, end, currentPoint, remainingHops, aggression);
+    }
+
+  }
 
   return {
     canvasContext: function(cc) {
@@ -22,6 +42,22 @@ var fractal = (function($) {
         var end = points[i];
         this.drawLine(start.x, start.y, end.x, end.y)
       }
+    },
+
+    generateFractalLine: function(args) {
+      var start = args.start;
+      var end = args.end;
+
+      var points = [start];
+      var currentPoint = undefined;
+
+      while(currentPoint !== end) {
+        currentPoint = getNextPoint(start, end, currentPoint, args);
+        points.push(currentPoint);
+      }
+
+
+      return points;
     }
   };
 
@@ -29,7 +65,9 @@ var fractal = (function($) {
 
 $(document).ready(function() {
   fractal.canvasContext(jQuery('#mapCanvas')[0].getContext('2d'));
-  fractal.drawMultiline([
-    {x: 100, y: 100}, {x: 300, y: 100}, {x: 300, y: 300 }, {x: 100, y: 300}, {x: 100, y: 100}
-  ]);
+  var fractalLine = fractal.generateFractalLine({
+    start: {x: 100, y: 100},
+    end: {x:300, y:300}
+  });
+  fractal.drawMultiline(fractalLine);
 });
