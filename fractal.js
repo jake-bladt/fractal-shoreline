@@ -2,12 +2,12 @@ var fractal = (function($) {
   return function() {
     var _cc;
 
-    canvasContext: function(cc) {
+    this.canvasContext = function(cc) {
       if(cc) _cc = cc;
       return _cc;
     },
 
-    drawLine: function(x1, y1, x2, y2) {
+    this.drawLine = function(x1, y1, x2, y2) {
       var context = _cc.getDrawingContext();
       context.lineWidth = 2;
       context.strokeStyle = 'black';
