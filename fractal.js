@@ -2,8 +2,14 @@ var fractal = (function($) {
 
   var _cc = undefined;
 
-  var getNextHop = function(start, end, current, hopsCount, agression) {
+  var getSlope = function(fromPoint, toPoint) {
 
+  };
+
+  var getNextHop = function(start, end, current, hopsCount, rangeOfMotion, aggression) {
+    // Determine a range of directions it's okay for the next point to be in. Those directions must all be 
+    // towards <<end>> both in relation to <<start>> and relation to <<current>>. They will be further constrained
+    // <<rangeOfMotion>>.
   }
 
   var getNextPoint = function(start, end, current, args) {
@@ -11,13 +17,14 @@ var fractal = (function($) {
     var maxHops = args.maxHops || 10;
     var minHops = args.minHops || 5;
     var aggression = args.aggression || 1.0;
+    var rangeOfMotion = args.rangeOfMotion || 0.75;
     var currentPoint = current || start;
     var remainingHops = maxHops - hopsTaken;
 
     if(remainingHops === 1) {
       return end;
     } else {
-      return getNextPoint(start, end, currentPoint, remainingHops, aggression);
+      return getNextPoint(start, end, currentPoint, remainingHops, rangeOfMotion, aggression);
     }
 
   }
