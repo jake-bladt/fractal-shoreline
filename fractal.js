@@ -1,22 +1,23 @@
 var fractal = (function($) {
-  return function() {
-    var _cc;
 
-    this.canvasContext = function(cc) {
-      if(cc) _cc = cc;
-      return _cc;
+  var _cc;
+
+  return {
+    canvasContext: function(cc) {
+    if(cc) _cc = cc;
+    return _cc;
     },
 
-    this.drawLine = function(x1, y1, x2, y2) {
+    drawLine: function(x1, y1, x2, y2) {
       var context = _cc.getDrawingContext();
       context.lineWidth = 2;
       context.strokeStyle = 'black';
       context.moveTo(x1, y1);
       context.lineTo(x2, y2);
-      context.stroke();    
-  }
+      context.stroke();
+    }
+  };
 
-  return ret;
 })(jQuery);
 
 $(document).ready(function() {
