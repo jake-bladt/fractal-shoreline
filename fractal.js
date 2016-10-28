@@ -7,6 +7,14 @@ var fractal = (function($) {
     return(fromPoint.y - toPoint.y) / (fromPoint.x - toPoint.x);
   };
 
+  var constrainRange = function(absMin, absMax, rangeOfMotion) {
+    var totalSize = (absMax - absMin) * rangeOfMotion;
+    return {
+
+    }
+  }
+
+
   var getSlopeRange = function(fromPoint, toPoint, rangeOfMotion) {
     var slope = getSlope(fromPoint, toPoint);
     if(isNaN(slope)) {
