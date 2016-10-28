@@ -1,0 +1,2 @@
+var fractal = function() {}; // namespace
+
