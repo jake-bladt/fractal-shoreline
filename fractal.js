@@ -3,14 +3,20 @@ var fractal = (function($) {
   var _cc = undefined;
 
   var getSlope = function(fromPoint, toPoint) {
-
+    return(fromPoint.y - toPoint.y) / (fromPoint.x - toPoint.x);
   };
+
+  var getSlopeRange = function(fromPoint, toPoint, rangeOfMotion) {
+    var slope = getSlope(fromPoint, toPoint);
+  }
 
   var getNextHop = function(start, end, current, hopsCount, rangeOfMotion, aggression) {
     // Determine a range of directions it's okay for the next point to be in. Those directions must all be 
     // towards <<end>> both in relation to <<start>> and relation to <<current>>. They will be further constrained
     // <<rangeOfMotion>>.
-  }
+
+
+  };
 
   var getNextPoint = function(start, end, current, args) {
     var hopsTaken = args.hopsTaken || 0;
@@ -27,7 +33,7 @@ var fractal = (function($) {
       return getNextPoint(start, end, currentPoint, remainingHops, rangeOfMotion, aggression);
     }
 
-  }
+  };
 
   return {
     canvasContext: function(cc) {
