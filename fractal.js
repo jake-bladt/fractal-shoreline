@@ -22,7 +22,7 @@ var fractal = (function($) {
     };
   }
 
-  var getSlopeRange = function(fromPoint, toPoint, rangeOfMotion) {
+  var getDirectionRange = function(fromPoint, toPoint, rangeOfMotion) {
     var slope = getSlope(fromPoint, toPoint);
     if(isNaN(slope)) {
       // TODO - Apply range of motion.
