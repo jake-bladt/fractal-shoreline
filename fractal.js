@@ -15,7 +15,7 @@ var fractal = (function($) {
   }
 
   var applyRangeOfMotion = function(minMax, rangeOfMotion) {
-
+    var centerPoint = minMax.min + (minMax.max - minMax.min) / 2.0;
   }
 
   var getSlopeRange = function(fromPoint, toPoint, rangeOfMotion) {
