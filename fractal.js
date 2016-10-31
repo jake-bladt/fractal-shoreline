@@ -7,11 +7,8 @@ var fractal = (function($) {
     return(fromPoint.y - toPoint.y) / (fromPoint.x - toPoint.x);
   };
 
-  var constrainRange = function(absMin, absMax, rangeOfMotion) {
-    var totalSize = (absMax - absMin) * rangeOfMotion;
-    return {
-
-    }
+  var getDirection = function(fromPoint, toPoint) {
+    
   }
 
   var applyRangeOfMotion = function(minMax, rangeOfMotion) {
