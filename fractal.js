@@ -14,15 +14,15 @@ var fractal = (function($) {
     }
   }
 
+  var applyRangeOfMotion = function(minMax, rangeOfMotion) {
+
+  }
 
   var getSlopeRange = function(fromPoint, toPoint, rangeOfMotion) {
     var slope = getSlope(fromPoint, toPoint);
     if(isNaN(slope)) {
       // TODO - Apply range of motion.
-      return {
-        min: Math.PI / 2.0,
-        max: 3.0 + Math.PI / 2.0
-      }
+      return applyRangeOfMotion({ min: Math.PI / 2.0, max: 3.0 + Math.PI / 2.0}, rangeOfMotion);
     } else {
 
     }
