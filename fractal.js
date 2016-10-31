@@ -8,7 +8,9 @@ var fractal = (function($) {
   };
 
   var getDirection = function(fromPoint, toPoint) {
-    
+    var slope = getSlope(fromPoint, toPoint);
+    if(isNan(slope)) return Math.PI;
+
   }
 
   var applyRangeOfMotion = function(minMax, rangeOfMotion) {
@@ -50,7 +52,7 @@ var fractal = (function($) {
     if(remainingHops === 1) {
       return end;
     } else {
-      return getNextPoint(start, end, currentPoint, remainingHops, rangeOfMotion, aggression);
+      return getNextHop(start, end, currentPoint, remainingHops, rangeOfMotion, aggression);
     }
 
   };
