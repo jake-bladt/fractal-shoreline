@@ -9,7 +9,7 @@ var fractal = (function($) {
 
   var getDirection = function(fromPoint, toPoint) {
     var slope = getSlope(fromPoint, toPoint);
-    if(isNan(slope)) return Math.PI;
+    if(isNaN(slope)) return Math.PI;
 
   }
 
