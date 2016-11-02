@@ -23,20 +23,15 @@ var fractal = (function($) {
       }
     },
 
-    generateFractalLine: function(args) {
-      var start = args.start;
-      var end = args.end;
+    generateShoreline: function(shape, args) {
+      var shoreline = {
+        points: [];
+      };
 
-      var points = [start];
-      var currentPoint = undefined;
-
-      while(currentPoint !== end) {
-        currentPoint = getNextPoint(start, end, currentPoint, args);
-        points.push(currentPoint);
-      }
-
-
-      return points;
+      for(var i = 0; i < shape.points.length - 1; ++i) {
+        // when snowflakes live long enough, they evolve into glaciers
+      }; 
+      return newShoreline;
     }
   };
 
@@ -44,9 +39,4 @@ var fractal = (function($) {
 
 $(document).ready(function() {
   fractal.canvasContext(jQuery('#mapCanvas')[0].getContext('2d'));
-  var fractalLine = fractal.generateFractalLine({
-    start: {x: 100, y: 100},
-    end: {x:300, y:300}
-  });
-  fractal.drawMultiline(fractalLine);
 });
