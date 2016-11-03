@@ -35,20 +35,20 @@ var fractal = (function($) {
 
     generateShoreline: function(shape, args) {
       var shoreline = {
-        points: [];
+        points: []
       };
 
-      var aroundOne = function(num) { reurn 0.8 + Math.random() * 0.4 };
+      var aroundOne = function(num) { return 0.8 + Math.random() * 0.4 };
 
       for(var i = 0; i < shape.points.length - 1; ++i) {
         // when snowflakes live long enough, they evolve into glaciers
         var start = shape.points[i];
         var   end = shape.points[i + 1];
         shoreline.points.push(start);
-        shoreline.points.push({start: start, end: end}, 0.333, aroundOne);
+        shoreline.points.push(pointOnLine({start: start, end: end}, 0.333, aroundOne));
         // push a point up to 20% the line's length above
         // or below the line, perpendicular
-        shoreline.points.push({start: start, end: end}, 0.667, aroundOne);
+        shoreline.points.push(pointOnLine({start: start, end: end}, 0.667, aroundOne));
       }; 
       return shoreline;
     }
