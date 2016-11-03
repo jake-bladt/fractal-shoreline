@@ -30,6 +30,13 @@ var fractal = (function($) {
 
       for(var i = 0; i < shape.points.length - 1; ++i) {
         // when snowflakes live long enough, they evolve into glaciers
+        var start = shape.points[i];
+        var end = shape.points[i + 1];
+        shoreline.points.push(start);
+        // push a point 1/3ish from start to end.
+        // push a point up to 20% the line's length above
+        // or below the line, perpendicular
+        // push a point 2/3ish from start to end.
       }; 
       return newShoreline;
     }
