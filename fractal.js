@@ -3,11 +3,11 @@ var fractal = (function($) {
 
   var pointOnLine = function(line, pctDistance, coeff) {
     var coeffNum = (typeof(coeff) === 'function') ? coeff() : coeff;
-    var deltaX = line.start.x - line.end.x;
-    var deltaY = line.start.y - line.end.y;
+    var deltaX = line.end.x - line.start.x;
+    var deltaY = line.end.y - line.start.y;
     return {
-      x: deltaX * pctDistance * coeffNum,
-      y: deltaY * pctDistance * coeffNum
+      x: line.start.x + deltaX * pctDistance * coeffNum,
+      y: line.start.y + deltaY * pctDistance * coeffNum
     }
   };
 
