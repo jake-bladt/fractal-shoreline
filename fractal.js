@@ -16,7 +16,7 @@ var fractal = (function($) {
     var deltaY = line.end.y - line.start.y;
     if(0 === deltaX) return Math.abs(deltaY);
     if(0 === deltaY) return Math.abs(deltaX);
-    return Math.sqrt(math.pow(deltaX, 2.0) + Math.pow(deltaY, 2.0));
+    return Math.sqrt(Math.pow(deltaX, 2.0) + Math.pow(deltaY, 2.0));
   };
 
   var getSlopeIntercept = function(line) {
@@ -28,11 +28,11 @@ var fractal = (function($) {
         return deltaY / deltaX;
       })(),
       perpendicularSlope: (function() {
-          var original = this.slope();
-          return isNaN(original) ? 0 : -1.0 / this.slope();
+          var original = this.slope;
+          return isNaN(original) ? 0 : -1.0 / this.slope;
       })(),  
       yintercept: (function() {
-        var m = this.slope();
+        var m = this.slope;
         if(isNaN(m)) return line.start.x;
         return line.start.y - m * line.start.x;
       })()
@@ -44,7 +44,7 @@ var fractal = (function($) {
       interceptingAt: function(intercept) {
         var slope = getSlopeIntercept(line).perpendicularSlope;
         var yIntercept = (function(m) {
-          var x = intercept.x - intercept.y / slope;
+          var x = 0 === slope ? intercept.x : (intercept.x - intercept.y) / slope;
           return {x: x, y: 0};
         })(slope);
         return { start: intercept, end: yIntercept};
@@ -110,7 +110,7 @@ var fractal = (function($) {
 
           var midpoint = pointOnLine(line, 0.5, aroundOne);
           var volFn = function() { return Math.random() * volatility; };
-          shoreline.points.push(pointPerpendicularTo(line, midpoint, volFn));
+          shoreline.points.push(pointPerpendicularTo(line, midpoint, 1.0).at(Math.random() * volatility));
 
           shoreline.points.push(pointOnLine(line, 0.667, aroundOne));
         };
@@ -130,11 +130,12 @@ $(document).ready(function() {
   var shoreline = fractal.generateShoreline(
   {
     points: [
-      { x: 100, y:100 },
-      { x: 100, y:600 },
-      { x: 600, y:600 },
-      { x: 600, y:100 },
-      { x: 100, y:100 }
+      { x: 100, y: 350 },
+      { x: 100, y: 400 },
+      { x: 500, y: 400 },
+      { x: 350, y: 100 },
+      { x: 250, y: 200 },
+      { x: 100, y: 100 }
     ]
   });
   fractal.drawMultiline(shoreline.points);
