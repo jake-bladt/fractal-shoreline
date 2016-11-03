@@ -2,7 +2,7 @@ var fractal = (function($) {
   var _cc = undefined;
 
   var pointOnLine = function(line, pctDistance, coeff) {
-    var coeffNum = (typeof(coeff) === 'function') ? coeff() : coeff;
+    var coeffNum = ((typeof(coeff) === 'function') ? coeff() : coeff) || 1.0;
     var deltaX = line.end.x - line.start.x;
     var deltaY = line.end.y - line.start.y;
     return {
@@ -18,6 +18,31 @@ var fractal = (function($) {
     if(0 === deltaY) return Math.abs(deltaX);
     return Math.sqrt(math.pow(deltaX, 2.0) + Math.pow(deltaY, 2.0));
   };
+
+  var getSlopeIntercept = function(line) {
+    return {
+      slope: (function() {
+        var deltaX = line.start.x - line.end.x;
+        if(0 === deltaX) return NaN;
+        var deltaY = line.start.y - line.end.y;
+        return deltaY / deltaX;
+      })(),
+      yintercept: 0,
+      perpendicularSlope: NaN
+    }
+  }
+
+  var pointPerpendicularTo = function(line, coeff) {
+    var coeffNum = ((typeof(coeff) === 'function') ? coeff() : coeff) || 1.0;
+
+    return {
+      at: function(distance) {
+        // create perpendicular line from the center of original line to the y-intercept
+        // take the ratio of that line / distance
+        // create a point along that line, ratio percentage
+      }
+    }
+  }
 
   return {
     canvasContext: function(cc) {
