@@ -11,6 +11,14 @@ var fractal = (function($) {
     }
   };
 
+  var lineLength = function(line) {
+    var deltaX = line.end.x - line.start.x;
+    var deltaY = line.end.y - line.start.y;
+    if(0 === deltaX) return Math.abs(deltaY);
+    if(0 === deltaY) return Math.abs(deltaX);
+    return Math.sqrt(math.pow(deltaX, 2.0) + Math.pow(deltaY, 2.0));
+  };
+
   return {
     canvasContext: function(cc) {
     if(cc) _cc = cc;
@@ -49,7 +57,8 @@ var fractal = (function($) {
         // push a point up to 20% the line's length above
         // or below the line, perpendicular
         shoreline.points.push(pointOnLine({start: start, end: end}, 0.667, aroundOne));
-      }; 
+      };
+      shoreline.points.push(shape.points[0]); 
       return shoreline;
     }
   };
@@ -71,6 +80,6 @@ $(document).ready(function() {
     }
   );
 
-  fractal.drawMultiline(shoreline);
+  fractal.drawMultiline(shoreline.points);
 
 });
