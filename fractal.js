@@ -27,10 +27,15 @@ var fractal = (function($) {
         var deltaY = line.start.y - line.end.y;
         return deltaY / deltaX;
       })(),
-      yintercept: 0,
-      perpendicularSlope: -1.0 / this.slope(); 
+      perpendicularSlope: (function() {
+          var original = this.slope();
+          return isNaN(original) ? 0 : -1.0 / this.slope();
+        })(),  
+        yintercept: (function() {
+          
+        })()
+      }
     }
-  }
 
   var pointPerpendicularTo = function(line, coeff) {
     var coeffNum = ((typeof(coeff) === 'function') ? coeff() : coeff) || 1.0;
@@ -66,45 +71,50 @@ var fractal = (function($) {
       }
     },
 
-    generateShoreline: function(shape, args) {
-      var shoreline = {
-        points: []
-      };
+    generateShoreline: function(sourceShape, args) {
+      args = args || {};
+      var generations = args.generations || 1;
+      var shape = sourceShape;
 
-      var aroundOne = function(num) { return 0.8 + Math.random() * 0.4 };
+      for(var i = 0; i <= generations; ++i) {
+        var shoreline = {
+          points: []
+        };
 
-      for(var i = 0; i < shape.points.length - 1; ++i) {
-        // when snowflakes live long enough, they evolve into glaciers
-        var start = shape.points[i];
-        var   end = shape.points[i + 1];
-        shoreline.points.push(start);
-        shoreline.points.push(pointOnLine({start: start, end: end}, 0.333, aroundOne));
-        // push a point up to 20% the line's length above
-        // or below the line, perpendicular
-        shoreline.points.push(pointOnLine({start: start, end: end}, 0.667, aroundOne));
-      };
-      shoreline.points.push(shape.points[0]); 
-      return shoreline;
+        var aroundOne = function(num) { return 0.8 + Math.random() * 0.4 };
+
+        for(var i = 0; i < shape.points.length - 1; ++i) {
+          // when snowflakes live long enough, they evolve into glaciers
+          var start = shape.points[i];
+          var   end = shape.points[i + 1];
+          shoreline.points.push(start);
+          shoreline.points.push(pointOnLine({start: start, end: end}, 0.333, aroundOne));
+          // push a point up to 20% the line's length above
+          // or below the line, perpendicular
+          shoreline.points.push(pointOnLine({start: start, end: end}, 0.667, aroundOne));
+        };
+      
+        shoreline.points.push(shape.points[0]); 
+        shape = shoreline;
+      }
+
+      return shape;
     }
   };
 
 })(jQuery);
 
 $(document).ready(function() {
-    fractal.canvasContext(jQuery('#mapCanvas')[0].getContext('2d'));
-
-    var shoreline = fractal.generateShoreline(
-    {
-      points: [
-        { x: 100, y:100 },
-        { x: 100, y:600 },
-        { x: 600, y:600 },
-        { x: 600, y:100 },
-        { x: 100, y:100 }
-      ]
-    }
-  );
-
+  fractal.canvasContext(jQuery('#mapCanvas')[0].getContext('2d'));
+  var shoreline = fractal.generateShoreline(
+  {
+    points: [
+      { x: 100, y:100 },
+      { x: 100, y:600 },
+      { x: 600, y:600 },
+      { x: 600, y:100 },
+      { x: 100, y:100 }
+    ]
+  });
   fractal.drawMultiline(shoreline.points);
-
 });
