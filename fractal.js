@@ -106,14 +106,13 @@ var fractal = (function($) {
           var  line = {start: start, end: end};
 
           shoreline.points.push(start);
-          shoreline.points.push(pointOnLine({line, end: end}, 0.333, aroundOne));
-          shoreline.points.push(pointPerpendicularTo(line, 
-            pointOnLine({line, end: end}, 0.5, aroundOne),
-            (function() {
-              return Math.random() * volatility;
-            })();
-          );
-          shoreline.points.push(pointOnLine({start: start, end: end}, 0.667, aroundOne));
+          shoreline.points.push(pointOnLine(line, 0.333, aroundOne));
+
+          var midpoint = pointOnLine(line, 0.5, aroundOne);
+          var volFn = function() { return Math.random() * volatility; };
+          shoreline.points.push(pointPerpendicularTo(line, midpoint, volFn));
+
+          shoreline.points.push(pointOnLine(line, 0.667, aroundOne));
         };
       
         shoreline.points.push(shape.points[0]); 
