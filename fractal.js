@@ -28,7 +28,7 @@ var fractal = (function($) {
         return deltaY / deltaX;
       })(),
       yintercept: 0,
-      perpendicularSlope: NaN
+      perpendicularSlope: -1.0 / this.slope(); 
     }
   }
 
