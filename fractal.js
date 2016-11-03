@@ -30,21 +30,36 @@ var fractal = (function($) {
       perpendicularSlope: (function() {
           var original = this.slope();
           return isNaN(original) ? 0 : -1.0 / this.slope();
-        })(),  
-        yintercept: (function() {
-          
-        })()
+      })(),  
+      yintercept: (function() {
+        var m = this.slope();
+        if(isNaN(m)) return line.start.x;
+        return line.start.y - m * line.start.x;
+      })()
+    };
+  }
+
+  var getPerpendicularLine = function(line) {
+    return {
+      interceptingAt: function(intercept) {
+        var slope = getSlopeIntercept(line).perpendicularSlope;
+        var yIntercept = (function(m) {
+          var x = intercept.x - intercept.y / slope;
+          return {x: x, y: 0};
+        })(slope);
+        return { start: intercept, end: yIntercept};
       }
     }
+  };
 
-  var pointPerpendicularTo = function(line, coeff) {
+  var pointPerpendicularTo = function(line, intercept, coeff) {
     var coeffNum = ((typeof(coeff) === 'function') ? coeff() : coeff) || 1.0;
 
     return {
       at: function(distance) {
-        // create perpendicular line from the center of original line to the y-intercept
-        // take the ratio of that line / distance
-        // create a point along that line, ratio percentage
+        var perpendicularLine = getPerpendicularLine(line).interceptingAt(intercept);
+        var ratio = lineLength(perpendicularLine) / lineLength(line);
+        return pointOnLine(perpendicularLine, ratio, coeffNum);
       }
     }
   }
@@ -74,6 +89,7 @@ var fractal = (function($) {
     generateShoreline: function(sourceShape, args) {
       args = args || {};
       var generations = args.generations || 1;
+      var volatility = args.volatility || 0.2;
       var shape = sourceShape;
 
       for(var i = 0; i <= generations; ++i) {
@@ -87,10 +103,16 @@ var fractal = (function($) {
           // when snowflakes live long enough, they evolve into glaciers
           var start = shape.points[i];
           var   end = shape.points[i + 1];
+          var  line = {start: start, end: end};
+
           shoreline.points.push(start);
-          shoreline.points.push(pointOnLine({start: start, end: end}, 0.333, aroundOne));
-          // push a point up to 20% the line's length above
-          // or below the line, perpendicular
+          shoreline.points.push(pointOnLine({line, end: end}, 0.333, aroundOne));
+          shoreline.points.push(pointPerpendicularTo(line, 
+            pointOnLine({line, end: end}, 0.5, aroundOne),
+            (function() {
+              return Math.random() * volatility;
+            })();
+          );
           shoreline.points.push(pointOnLine({start: start, end: end}, 0.667, aroundOne));
         };
       
