@@ -42,10 +42,12 @@ var fractal = (function($) {
   var getPerpendicularLine = function(line) {
     return {
       interceptingAt: function(intercept) {
-        var slope = getSlopeIntercept(line).perpendicularSlope;
+        var originalSlopeIntercept = getSlopeIntercept(line);
+        var slope = originalSlopeIntercept.perpendicularSlope;
         var yIntercept = (function(m) {
-          var x = 0 === slope ? intercept.x : (intercept.x - intercept.y) / slope;
-          return {x: x, y: 0};
+          // Use x-intercept for lines with slope 0. (They never cross the y-axis or they always do.)
+          var x = 0 === m ? 0 : (intercept.x - intercept.y) / m;
+          return {x: x, y: 0 === m ? intercept.y : 0};
         })(slope);
         return { start: intercept, end: yIntercept};
       }
@@ -130,13 +132,12 @@ $(document).ready(function() {
   var shoreline = fractal.generateShoreline(
   {
     points: [
-      { x: 100, y: 350 },
+      { x: 100, y: 100 },
       { x: 100, y: 400 },
-      { x: 500, y: 400 },
-      { x: 350, y: 100 },
-      { x: 250, y: 200 },
+      { x: 400, y: 100 },
+      { x: 400, y: 400 },
       { x: 100, y: 100 }
     ]
   });
-  fractal.drawMultiline(shoreline.points);
+  fractal.drawMultiline(shoreline.points, { generations: 4 });
 });
