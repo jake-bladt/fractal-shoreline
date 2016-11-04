@@ -111,8 +111,8 @@ var fractal = (function($) {
           shoreline.points.push(pointOnLine(line, 0.333, aroundOne));
 
           var midpoint = pointOnLine(line, 0.5, aroundOne);
-          var volFn = function() { return Math.random() * volatility; };
-          shoreline.points.push(pointPerpendicularTo(line, midpoint, 1.0).at(Math.random() * volatility));
+          var vertex = pointPerpendicularTo(line, midpoint, 1.0);
+          shoreline.points.push(vertex.at(Math.random() * volatility));
 
           shoreline.points.push(pointOnLine(line, 0.667, aroundOne));
         };
