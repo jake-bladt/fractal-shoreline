@@ -61,7 +61,7 @@ var fractal = (function($) {
       at: function(distance) {
         var perpendicularLine = getPerpendicularLine(line).interceptingAt(intercept);
         var ratio = lineLength(perpendicularLine) / lineLength(line);
-        return pointOnLine(perpendicularLine, ratio, coeffNum);
+        return pointOnLine(perpendicularLine, distance * ratio, coeffNum);
       }
     }
   }
@@ -111,8 +111,9 @@ var fractal = (function($) {
           shoreline.points.push(pointOnLine(line, 0.333, aroundOne));
 
           var midpoint = pointOnLine(line, 0.5, aroundOne);
-          var vertex = pointPerpendicularTo(line, midpoint, 1.0);
-          shoreline.points.push(vertex.at(Math.random() * volatility));
+          var getVertex = pointPerpendicularTo(line, midpoint, 1.0);
+          var vertex = getVertex.at(Math.random() * volatility);
+          shoreline.points.push(vertex);
 
           shoreline.points.push(pointOnLine(line, 0.667, aroundOne));
         };
