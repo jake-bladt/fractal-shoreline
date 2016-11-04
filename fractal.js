@@ -138,7 +138,10 @@ $(document).ready(function() {
       { x: 400, y: 400 },
       { x: 400, y: 100 },
       { x: 100, y: 100 }
-    ]
+    ],
+    { 
+      generations: 4 
+    }
   });
-  fractal.drawMultiline(shoreline.points, { generations: 4 });
+  fractal.drawMultiline(shoreline.points);
 });
