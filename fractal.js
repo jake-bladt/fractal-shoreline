@@ -1,6 +1,20 @@
 var fractal = (function($) {
   var _cc = undefined;
 
+  var describeVertex(originalLine, perpendicularLine, intercept, newPoint) {
+    var ols = originalLine.start;
+    var ole = originalLine.end;
+    console.log("Original line: (${ols.x},${ols.y}) -> (${ole.x},${ole.y})")
+
+    var pls = perpendicularLine.start;
+    var ple = perpendicularLine.end;
+    console.log("Perpendicular line: (${pls.x},${pls.y}) -> (${ple.x},${ple.y})")
+    
+    cosole.log("Intercept: (${intercept.x},{intercept.y})")
+    cosole.log("Vertex: (${newPoint.x},{newPoint.y})")
+
+  }
+
   var pointOnLine = function(line, pctDistance, coeff) {
     var coeffNum = ((typeof(coeff) === 'function') ? coeff() : coeff) || 1.0;
     var deltaX = line.end.x - line.start.x;
