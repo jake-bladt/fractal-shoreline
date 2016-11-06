@@ -75,7 +75,9 @@ var fractal = (function($) {
       at: function(distance) {
         var perpendicularLine = getPerpendicularLine(line).interceptingAt(intercept);
         var ratio = lineLength(perpendicularLine) / lineLength(line);
-        return pointOnLine(perpendicularLine, distance * ratio, coeffNum);
+        var ret = pointOnLine(perpendicularLine, distance * ratio, coeffNum);
+        describeVertex(line, perpendicularLine, intercept, ret);
+        return ret;
       }
     }
   }
