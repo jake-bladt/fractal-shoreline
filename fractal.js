@@ -1,7 +1,7 @@
 var fractal = (function($) {
   var _cc = undefined;
 
-  var describeVertex(originalLine, perpendicularLine, intercept, newPoint) {
+  var describeVertex = function(originalLine, perpendicularLine, intercept, newPoint) {
     var ols = originalLine.start;
     var ole = originalLine.end;
     console.log("Original line: (${ols.x},${ols.y}) -> (${ole.x},${ole.y})")
@@ -157,7 +157,7 @@ $(document).ready(function() {
     ]
   },
   { 
-    generations: 4 
+    generations: 1 
   }
   );
   fractal.drawMultiline(shoreline.points);
