@@ -12,7 +12,7 @@ var fractal = (function($) {
     
     console.log(`Intercept: (${intercept.x},${intercept.y})`);
     console.log(`Vertex: (${newPoint.x},${newPoint.y})`);
-
+    console.log('');
   }
 
   var pointOnLine = function(line, pctDistance, coeff) {
@@ -58,10 +58,12 @@ var fractal = (function($) {
       interceptingAt: function(intercept) {
         var originalSlopeIntercept = getSlopeIntercept(line);
         var slope = originalSlopeIntercept.perpendicularSlope;
+        if(0 === slope) {
+          return { start: intercept, end: { x: 0, y: intercept.y }};
+        };
         var yIntercept = (function(m) {
-          // Use x-intercept for lines with slope 0. (They never cross the y-axis or they always do.)
-          var x = 0 === m ? 0 : (intercept.x - intercept.y) / m;
-          return {x: x, y: 0 === m ? intercept.y : 0};
+          var x = (intercept.x - intercept.y) / m;
+          return {x: x, y: 0};
         })(slope);
         return { start: intercept, end: yIntercept};
       }
