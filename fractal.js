@@ -10,8 +10,8 @@ var fractal = (function($) {
     var ple = perpendicularLine.end;
     console.log(`Perpendicular line: (${pls.x},${pls.y}) -> (${ple.x},${ple.y})`);
     
-    console.log(`Intercept: (${intercept.x},{intercept.y})`);
-    console.log(`Vertex: (${newPoint.x},{newPoint.y})`);
+    console.log(`Intercept: (${intercept.x},${intercept.y})`);
+    console.log(`Vertex: (${newPoint.x},${newPoint.y})`);
 
   }
 
