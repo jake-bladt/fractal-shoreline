@@ -59,7 +59,7 @@ var fractal = (function($) {
         var originalSlopeIntercept = getSlopeIntercept(line);
         var slope = originalSlopeIntercept.perpendicularSlope;
         if(0 === slope) {
-          return { start: intercept, end: { x: 0, y: intercept.y }};
+          return { start: intercept, end: { x: intercept.x, y: 0 }};
         };
         var yIntercept = (function(m) {
           var x = (intercept.x - intercept.y) / m;
