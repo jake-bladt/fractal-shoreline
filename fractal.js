@@ -4,14 +4,14 @@ var fractal = (function($) {
   var describeVertex = function(originalLine, perpendicularLine, intercept, newPoint) {
     var ols = originalLine.start;
     var ole = originalLine.end;
-    console.log("Original line: (${ols.x},${ols.y}) -> (${ole.x},${ole.y})")
+    console.log(`Original line: (${ols.x},${ols.y}) -> (${ole.x},${ole.y})`)
 
     var pls = perpendicularLine.start;
     var ple = perpendicularLine.end;
-    console.log("Perpendicular line: (${pls.x},${pls.y}) -> (${ple.x},${ple.y})")
+    console.log(`Perpendicular line: (${pls.x},${pls.y}) -> (${ple.x},${ple.y})`);
     
-    cosole.log("Intercept: (${intercept.x},{intercept.y})")
-    cosole.log("Vertex: (${newPoint.x},{newPoint.y})")
+    console.log(`Intercept: (${intercept.x},{intercept.y})`);
+    console.log(`Vertex: (${newPoint.x},{newPoint.y})`);
 
   }
 
