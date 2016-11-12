@@ -22,6 +22,7 @@ var fractal = (function($) {
 
     // We only need the acute inclination to calculate our point.
     var inclination = Math.atan(slope) % Math.PI / 2.0;
+    var obverse = Math.PI / 2.0 - inclination;
   }
 
   var pointOnLine = function(line, pctDistance, coeff) {
