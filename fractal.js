@@ -95,8 +95,13 @@ var fractal = (function($) {
     return {
       at: function(distance) {
         var perpendicularLine = getPerpendicularLine(line).interceptingAt(intercept);
-        var ratio = lineLength(perpendicularLine) / lineLength(line);
-        var ret = pointOnLine(perpendicularLine, distance * ratio, coeffNum);
+        var originalSlopeIntercept = getSlopeIntercept(line);
+        var pSlope = originalSlopeIntercept.perpendicularSlope;
+
+        var ret = getVertex(intercept, pSlope, distance * coeffNum, 
+          function() {
+            return Math.random() > 0.5 ? 1.0 : -1.0 }
+        });
         describeVertex(line, perpendicularLine, intercept, ret);
         return ret;
       }
