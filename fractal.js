@@ -15,8 +15,12 @@ var fractal = (function($) {
     console.log('');
   }
 
-  var getVertex = function(intercept, slope, volatility, inversionFn) {
-    
+  var getVertex = function(intercept, slope, offset, inversionFn) {
+    // Special cases for m at 0 and NaN
+    if(slope === 0)  return { x: intercept.x + offset * inversionFn(), y: intercept.y };
+    if(isNaN(slope)) return { x: intercept.x, y: intercept.y + offset * inversionFn() };
+
+    var inclination = Math.atan(slope);
   }
 
   var pointOnLine = function(line, pctDistance, coeff) {
