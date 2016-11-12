@@ -58,7 +58,7 @@ var fractal = (function($) {
           return isNaN(original) ? 0 : -1.0 / this.slope;
       })(),  
       yintercept: (function() {
-        var m = this.slope();
+        var m = this.slope;
         if(isNaN(m)) return line.start.x;
         return line.start.y - m * line.start.x;
       })()
