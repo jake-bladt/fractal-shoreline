@@ -15,7 +15,9 @@ var fractal = (function($) {
     console.log('');
   }
 
-  var getVertex
+  var getVertex = function(intercept, slope, volatility, inversionFn) {
+    
+  }
 
   var pointOnLine = function(line, pctDistance, coeff) {
     var coeffNum = ((typeof(coeff) === 'function') ? coeff() : coeff) || 1.0;
