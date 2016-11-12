@@ -20,7 +20,8 @@ var fractal = (function($) {
     if(slope === 0)  return { x: intercept.x + offset * inversionFn(), y: intercept.y };
     if(isNaN(slope)) return { x: intercept.x, y: intercept.y + offset * inversionFn() };
 
-    var inclination = Math.atan(slope);
+    // We only need the acute inclination to calculate our point.
+    var inclination = Math.atan(slope) % Math.PI / 2.0;
   }
 
   var pointOnLine = function(line, pctDistance, coeff) {
