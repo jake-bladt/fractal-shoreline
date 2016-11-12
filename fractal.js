@@ -72,11 +72,11 @@ var fractal = (function($) {
         var slope = originalSlopeIntercept.perpendicularSlope;
 
         if(isNaN(slope)) {
-          return { start: intercept, end: { x: 0, y: intercept.y }};
+          return { start: intercept, end: { x: intercept.x, y: 0 }};
         }
 
         if(0 === slope) {
-          return { start: intercept, end: { x: intercept.x, y: 0 }};
+          return { start: intercept, end: { x: 0, y: intercept.y }};
         };
 
         var yIntercept = (function(m) {
