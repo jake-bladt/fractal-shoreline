@@ -100,7 +100,7 @@ var fractal = (function($) {
 
         var ret = getVertex(intercept, pSlope, distance * coeffNum, 
           function() {
-            return Math.random() > 0.5 ? 1.0 : -1.0 }
+            return Math.random() > 0.5 ? 1.0 : -1.0 
         });
         describeVertex(line, perpendicularLine, intercept, ret);
         return ret;
