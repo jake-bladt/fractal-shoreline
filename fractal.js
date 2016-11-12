@@ -15,6 +15,8 @@ var fractal = (function($) {
     console.log('');
   }
 
+  var getVertex
+
   var pointOnLine = function(line, pctDistance, coeff) {
     var coeffNum = ((typeof(coeff) === 'function') ? coeff() : coeff) || 1.0;
     var deltaX = line.end.x - line.start.x;
@@ -136,8 +138,8 @@ var fractal = (function($) {
           shoreline.points.push(pointOnLine(line, 0.333, aroundOne));
 
           var midpoint = pointOnLine(line, 0.5, aroundOne);
-          var getVertex = pointPerpendicularTo(line, midpoint, 1.0);
-          var vertex = getVertex.at(Math.random() * volatility);
+          var getVertexFn = pointPerpendicularTo(line, midpoint, 1.0);
+          var vertex = getVertexFn.at(Math.random() * volatility);
           shoreline.points.push(vertex);
 
           shoreline.points.push(pointOnLine(line, 0.667, aroundOne));
