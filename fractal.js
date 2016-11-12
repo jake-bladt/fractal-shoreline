@@ -21,7 +21,10 @@ var fractal = (function($) {
     if(isNaN(slope)) return { x: intercept.x, y: intercept.y + offset * inversionFn() };
 
     var squaredOffset = Math.pow(offset, 2.0);
+    var deltaX = Math.sqrt(squaredOffset / (slope + 1.0));
+    var deltaY = deltaX / slope;
 
+    return { x: intercept.x + deltaX * inversionFn(), y: intercept.y + deltaY * inversionFn() }
   }
 
   var pointOnLine = function(line, pctDistance, coeff) {
