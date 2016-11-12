@@ -84,7 +84,9 @@ var fractal = (function($) {
           return {x: x, y: 0};
         })(slope);
         
-        return { start: intercept, end: yIntercept};
+        var ret = { start: intercept, end: yIntercept};
+        drawLine(ret.start.x, ret.start.y, ret.end.x, ret.end.y, 'purple');
+        return ret;
       }
     }
   };
