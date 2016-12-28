@@ -171,5 +171,4 @@ var fractal = (function($) {
 
 })(jQuery);
 
-
-
+module.exports = fractal;
