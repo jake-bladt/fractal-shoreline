@@ -12,3 +12,8 @@ The work is meant to be used in the [WorldBuilder](https://github.com/jake-bladt
 ## notes
 
 The math for this may be the [complex hull algorithm](https://www.codeproject.com/Articles/775753/A-Convex-Hull-Algorithm-and-its-implementation-in).
+
+## links
+
+* [SVG Path](https://www.w3schools.com/graphics/svg_path.asp)
+* [Using Javascript with SVG](http://www.petercollingridge.co.uk/tutorials/svg/interactive/javascript/)
