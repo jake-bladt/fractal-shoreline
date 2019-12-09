@@ -1,0 +1,22 @@
+{
+  "name": "fractal-shoreline",
+  "version": "1.0.0",
+  "description": "A tool for generating fractal shorelines",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jake-bladt/fractal-shoreline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jake-bladt/fractal-shoreline/issues"
+  },
+  "homepage": "https://github.com/jake-bladt/fractal-shoreline#readme",
+  "dependencies": {
+    "@svgdotjs/svg.js": "^3.0.16"
+  }
+}

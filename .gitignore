@@ -11,6 +11,7 @@
 #NuGet
 packages/
 *.nupkg
+node_modules/
 
 # merge tool artifacts
 *.orig
