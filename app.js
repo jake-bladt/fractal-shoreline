@@ -4,4 +4,3 @@ window.addEventListener("load", () => {
     let square = draw.rect(100, 100);
     square.attr({ fill: 'green' });
 });
-
