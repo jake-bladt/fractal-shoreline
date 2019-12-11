@@ -15,5 +15,6 @@ The math for this may be the [complex hull algorithm](https://www.codeproject.co
 
 ## links
 
+* [FABRIC.JS TUTORIAL: THE ULTIMATE GUIDE TO OBJECTS AND COMPLEX SHAPES](https://codingsans.com/blog/fabricjs-tutorial)
 * [SVG Path](https://www.w3schools.com/graphics/svg_path.asp)
 * [Using Javascript with SVG](http://www.petercollingridge.co.uk/tutorials/svg/interactive/javascript/)
